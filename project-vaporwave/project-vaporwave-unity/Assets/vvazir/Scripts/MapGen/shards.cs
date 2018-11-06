@@ -102,7 +102,11 @@ public class shards : MonoBehaviour
                 Debug.Log(System.String.Format("{0} is ded", contact.transform.name));
                 //internalExploded = Instantiate(exploded, contact.transform.position, contact.transform.rotation, main.transform);
                 //internalExploded.transform.localScale = contact.transform.localScale;
-                Destroy(contact);
+                MeshRenderer mr = contact.GetComponent<MeshRenderer>();
+                List<Material> m = new List<Material>();
+                mr.GetMaterials(m);
+                m[1].shader = Shader.Find("dissolve");
+                Destroy(contact,4);
             }
 
             else
